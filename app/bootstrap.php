@@ -61,7 +61,6 @@ if (file_exists($classFile)) {
 
     $controller = new Decorator($controller);
     $controller->{$method}($id);
-
 } else {
     notfound();
 }

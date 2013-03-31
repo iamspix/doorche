@@ -25,7 +25,7 @@ class Database {
             $this->conn = new PDO($dsn, $username, $passwd);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            $this->get_error($e);
+            echo ('<pre>' . $e . '</pre>');
         }
     }
 
@@ -35,6 +35,20 @@ class Database {
 
     public function query($query) {
         $this->stmt =  $this->conn->prepare($query);
+    }
+
+    public function insert($query, $params = array()) {
+        $this->conn->beginTransaction();
+            $this->stmt = $this->conn->prepare($query);
+            $this->stmt->execute($params);
+        $this->conn->commit();
+    }
+
+    public function update($query, $params = array()) {
+        $this->conn->beginTransaction();
+            $this->stmt = $this->conn->prepare($query);
+            $this->stmt->execute($params);
+        $this->conn->commit();
     }
 
     public function num_rows($query, $params = array()) {
@@ -63,11 +77,6 @@ class Database {
         $params = is_array($params) ? $params : array($params);
         $this->stmt->execute($params);
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function get_error($e) {
-        $this->conn = null;
-        die($e->getMessage());
     }
 
     public function __destruct() {

@@ -26,7 +26,7 @@ class LoginDao extends Dao {
         // validate login only check if username and password combination is correct
         // this is much safer than checking if the username and password doest not
         // match, this prevents attackers from bruteforcing and guessing user's passwords and usernames
-        $query = 'SELECT id FROM tbl_users WHERE username = :usr AND password = :pwd';
+        $query = 'SELECT * FROM tbl_users WHERE username = :usr AND password = :pwd';
         $bindVal = array(
             ':usr' => $this->model->getUsername(),
             ':pwd' => md5($this->model->getPassword()) // this is quite not so strong, and I want this to be salted
@@ -42,13 +42,27 @@ class LoginDao extends Dao {
     }
 
     public function setSession() {
-        $_SESSION['username'] = $this->model->getUsername();
+        $_SESSION['username']    = $this->model->getUsername();
+        $_SESSION['loggedIn']    = true;
+        $result = $this->getAccess();
+        $_SESSION['accessLevel'] = $result['access_level'];
     }
 
     public function redirect() {
         if ($this->success) {
-            header('Location:' . base_url() . 'admin');
+            header('Location:' . base_url() . 'apartments');
+        } else {
+            header('Location:' . base_url());
         }
+    }
+
+    public function getAccess() {
+        $query = 'SELECT access_level FROM tbl_users WHERE username = :usr AND password = :pwd';
+        $bindVal = array(
+            ':usr' => $this->model->getUsername(),
+            ':pwd' => md5($this->model->getPassword()) // this is quite not so strong, and I want this to be salted
+            );
+        return $this->db->fetch($query, $bindVal);
     }
 }
 

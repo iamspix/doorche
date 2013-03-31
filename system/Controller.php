@@ -5,7 +5,7 @@
  *
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
- * 
+ *
  * @package		msi
  * @author              Joey Hipolito <me@joeyhipolito.com>
  * @license             University of the East Research and Development Unit

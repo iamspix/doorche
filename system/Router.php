@@ -5,7 +5,7 @@
  *
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
- * 
+ *
  * @package		msi
  * @author              Joey Hipolito <me@joeyhipolito.com>
  * @license             University of the East Research and Development Unit
@@ -15,20 +15,20 @@
 class Router {
     /**
      * @var (array)string $uri - contains the uri request
-     */    
+     */
     private $uri;
     /**
      * @var (array)string $controller - describes what class to call
-     */   
+     */
     private $controller;
     /**
      * @var (array)string $action - describes what class's method to execute
-     */ 
+     */
     private $action;
     /**
      * @var (array)string $id - optional parameter
      * @example users/delete/5
-     */ 
+     */
     private $id;
     /**
      * @param (array)string $uri - contains request parameters
@@ -36,9 +36,9 @@ class Router {
     public function __construct($uri) {
         $this->uri = $uri;
     }
-    
+
     public function map() {
-        
+
         if (empty($this->uri[0])) {
             $this->controller = DEFAULT_CONTROLLER;
             $this->action = 'index';
@@ -57,15 +57,15 @@ class Router {
             }
         }
     }
-    
+
     public function getController() {
         return $this->controller;
     }
-    
+
     public function getAction() {
         return $this->action;
     }
-    
+
     public function getId() {
         return $this->id;
     }

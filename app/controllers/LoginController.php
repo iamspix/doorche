@@ -26,6 +26,9 @@ class LoginController extends Controller {
     }
 
     public function index() {
+        if (isset($_SESSION['loggedIn'])) {
+            header('Location:' . base_url() . 'apartments');
+        }
         $this->view->render($this->template);
     }
 
@@ -37,12 +40,12 @@ class LoginController extends Controller {
         $model->setPassword($this->password);
         $loginDao = new LoginDao($model);
         $loginDao->login();
-
         $loginDao->redirect();
     }
 
     public function logout() {
         session_destroy();
+        header('Location:' . base_url());
     }
     //put your code here
 }
