@@ -1,26 +1,26 @@
 <?php
+// autoload multiple classes from multiple directories
 
-// autoload
+if (!function_exists('doorche_autoload')) {
+    function doorche_autoload($class) {
 
-if (!function_exists('autoload_system')) {
-    function autoload_system($className) {
-        $fileName = SYSPATH . $className . '.php';
-        if (file_exists($fileName)) {
-            require $fileName;
+        // List all directories
+        $paths = array(
+            SYSPATH,
+            ROOT . 'libs',
+            ROOT . 'helpers',
+            APPPATH . 'models',
+            APPPATH . 'dao'
+        );
+
+        foreach ($paths as $path) {
+            $file = $path . DS . $class . EXT;
+            if (is_file($file)) {
+                include $file;
+            }
         }
     }
 }
 
-if (!function_exists('autoload_libs')) {
-    function autoload_libs($className) {
-        $fileName = ROOT . 'libs' . DS . $className . '.php';
-        if (file_exists($fileName)) {
-            require $fileName;
-        }
-    }
-}
+spl_autoload_register('doorche_autoload');
 
-// autoload_register
-
-spl_autoload_register('autoload_system');
-spl_autoload_register('autoload_libs');

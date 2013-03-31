@@ -52,6 +52,14 @@ class ApartmentModel {
         return $this->building_manager;
     }
 
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
 }
 
 /* End of file ApartmentModel.php */

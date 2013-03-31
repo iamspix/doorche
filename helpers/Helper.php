@@ -1,8 +1,8 @@
 <?php
 
 /**
- * UnitsView - [Add a short description of what this file does]
- *
+ * Helper - [Add a short description of what this file does]
+ * Type : Class
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
  *
@@ -12,14 +12,8 @@
  * @copyright           Copyright (c) 2013
  */
 
-class UnitsView extends View {
-    public function __construct() {
-        $this->data['header'] = 'apartment';
-        $this->data['sidebar'] = 'units';
-        $this->data['footer'] = 'default';
-        $this->data['title'] = 'Units';
-        // add more
-    }
+interface Helper {
+    public function generateID($param);
 }
 
-/* End of file UnitsView.php */
+/* End of file Helper.php */

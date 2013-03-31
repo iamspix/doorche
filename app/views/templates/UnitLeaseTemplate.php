@@ -1,6 +1,5 @@
 <?php include ROOT . 'app' . DS . 'views' . DS . 'includes' . DS . $header . '_header' . EXT; ?>
-<?php include ROOT . 'app' . DS . 'views' . DS . 'includes' . DS . $sidebar . '_sidebar' . EXT; ?>
-<div id="content">
+<div id="content" class="no-sidebar">
     <div id="lease-unit">
         <form method="POST" action="<?php echo base_url();?>units/leaseSubmit">
             <h1>Rent</h1>

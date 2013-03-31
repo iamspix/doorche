@@ -5,7 +5,7 @@
  * Type : Class
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
- * 
+ *
  * @package		anccss
  * @author              Joey Hipolito <me@joeyhipolito.com>
  * @license             University of the East Research and Development Unit
@@ -14,9 +14,9 @@
 
 class Dao {
     protected $db = null;
-    
+
     public function __construct() {
-        $this->db = new Database('mysql:host=localhost;dbname=doorche', 'root', '');
+        $this->db = new Database('mysql:host=localhost;dbname=joeyhipo_doorch', 'joeyhipo_spixy', 'i4m$piX_XI');
     }
     //put your code here
 }

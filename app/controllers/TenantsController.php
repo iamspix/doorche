@@ -11,14 +11,6 @@
  * @license             University of the East Research and Development Unit
  * @copyright           Copyright (c) 2013
  */
-include APPPATH . 'models' . DS . 'TenantModel' . EXT;
-include APPPATH . 'models' . DS . 'UserModel' . EXT;
-include APPPATH . 'models' . DS . 'UnitModel' . EXT;
-include APPPATH . 'models' . DS . 'ApartmentModel' . EXT;
-include APPPATH . 'dao' . DS . 'ApartmentDao' . EXT;
-include APPPATH . 'dao' . DS . 'UnitDao' . EXT;
-include APPPATH . 'dao' . DS . 'UserDao' . EXT;
-include APPPATH . 'dao' . DS . 'TenantDao' . EXT;
 
 class TenantsController extends Controller {
     private $template;
@@ -64,33 +56,29 @@ class TenantsController extends Controller {
         $this->view->render('add_tenant');
     }
 
-    public function addSubmit(){
-        $model = new TenantModel();
-        $model->setFirstName($_POST['firstname']);
-        $model->setLastName($_POST['lastname']);
-        $model->setGender($_POST['gender']);
-        $model->setMobile($_POST['mobile']);
-        $model->setBday($_POST['birthday']);
-        $model->setEmailAddress($_POST['email']);
-        $model->setUnitId($_POST['unit']);
+    public function register() {
+        $tenantModel = new TenantModel();
+        $tenantModel->setFirstName($_POST['firstname']);
+        $tenantModel->setGender($_POST['gender']);
+        $tenantModel->setLastName($_POST['lastname']);
+        $tenantModel->setMobile($_POST['mobile']);
+        $tenantModel->setUnitId($_POST['unit']);
 
-        // get apartment ID via unit
-        $aptModel = new ApartmentModel();
-        $aptModel->setApartmentKey($_POST['apartment']);
-//        echo $aptModel->getApartmentKey();
-        $aptDao = new ApartmentDao($aptModel);
-//        print_r($aptDao->getAptIdByKey());
-        $result = $aptDao->getAptIdByKey();
-        $aptID = $result['apartment_id'];
+        // get the apartment ID for generation of tenant id
+        $aptDAO = new ApartmentDao();
 
         // generate new tenantID
-        $h = new Helpers();
-        $model->setId($h->generateID($aptID));
+        $h = new TenantHelper();
 
-        $dao = new TenantDao($model);
-        $dao->addTenant();
+        // set tenantID
+        $id = $h->generateID($aptDAO->getIDbyKey($_POST['apartment']));
+        $tenantModel->setId($id);
 
-        header('Location:' . base_url() . 'units/lease/' . $model->getId());
+        // register tenant
+        $tenantDAO = new TenantDao($tenantModel);
+        $tenantDAO->addTenant();
+        header('Location: ' . base_url() . 'units/lease/' . $tenantModel->getId());
+
     }
 
     public function delete($id) {

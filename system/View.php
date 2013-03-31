@@ -5,7 +5,7 @@
  *
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
- * 
+ *
  * @package		msi
  * @author              Joey Hipolito <me@joeyhipolito.com>
  * @license             University of the East Research and Development Unit
@@ -13,11 +13,11 @@
  */
 
 class View {
-    
+
     protected $templatePath;
     protected $templateDirectory;
     public $data = array();
-    
+
     public function getData($key = null) {
         if (!is_null($key)) {
             return isset($this->data[$key]) ? $this->data[$key] : null;
@@ -25,7 +25,7 @@ class View {
             return $this->data;
         }
     }
-    
+
     /**
      * Set data
      *
@@ -53,20 +53,20 @@ class View {
             throw new InvalidArgumentException('Cannot set View data with provided arguments. Usage: `View::setData( $key, $value );` or `View::setData([ key => value, ... ]);`');
         }
     }
-    
+
     public function setTemplate($template) {
         $w = explode('_', $template);
         foreach ($w as $key => $value) {
-           $w[$key] = ucfirst($value); 
+           $w[$key] = ucfirst($value);
         }
         $template = implode('', $w) . 'Template';
-        
+
         $this->templatePath = APPPATH . 'views' . DS . 'templates' . DS . $template . EXT;
         if (!file_exists($this->templatePath)) {
             throw new RuntimeException($this->templatePath . ' does not exist');
         }
     }
-    
+
     public function render($template) {
         $this->setTemplate($template);
         extract($this->data);

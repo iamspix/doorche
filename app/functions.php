@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die ('No Direct Access Allowed!');
+<?php
+
+defined('SYSPATH') or die ('No Direct Access Allowed!');
 
 // -- Configuration specific functions -----------------------------------------
 
@@ -23,7 +25,7 @@ if (!function_exists('set_error_reporting')) {
  */
 if (!function_exists('base_url')) {
     function base_url() {
-        return 'http://localhost/dbms/';
+        return 'http://joeyhipolito.com/projects/dbms/';
     }
 }
 
@@ -33,7 +35,7 @@ if (!function_exists('base_url')) {
  */
 if (!function_exists('asset_url')) {
     function asset_url() {
-        return 'http://localhost/dbms/assets/';
+        return 'http://joeyhipolito.com/projects/dbms/assets/';
     }
 }
 

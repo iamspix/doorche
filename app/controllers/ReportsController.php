@@ -12,12 +12,10 @@
  * @copyright           Copyright (c) 2013
  */
 include ROOT . 'libs/fpdf/fpdf.php';
-include APPPATH . 'models' . DS . 'LeaseModel' . EXT;
-include APPPATH . 'dao' . DS . 'LeaseDao' . EXT;
 
 class ReportsController extends Controller {
 
-    public function genReportUponReg($tenantID) {
+    public function lease($tenantID) {
         $leaseModel = new LeaseModel();
         $leaseModel->setTenantId($tenantID);
         $leaseDao = new LeaseDao($leaseModel);

@@ -12,9 +12,6 @@
  * @copyright           Copyright (c) 2013
  */
 
-include APPPATH . 'models' . DS . 'ApartmentModel' . EXT;
-include APPPATH . 'dao' . DS . 'ApartmentDao' . EXT;
-
 class ApartmentsController extends Controller {
     private $template;
 
@@ -24,21 +21,34 @@ class ApartmentsController extends Controller {
     }
 
     public function index() {
-        $model = new ApartmentModel();
-        $dao = new ApartmentDao($model);
-        $this->view->data['apartments'] = $dao->getAllApartments();
-        $this->view->render($this->template);
+        // if admin
+        if ($_SESSION['accessLevel'] == 'admin') {
+            $dao = new ApartmentDao();
+            $this->view->data['apartments'] = $dao->getAllApartments();
+            $this->view->render($this->template);
+        } else {// if manager
+            // determine apartment key by manager
+            $apartmentDao = new ApartmentDao();
+            $apartmentKey = $apartmentDao->getAptKeyByManager($_SESSION['username']);
+            $apt_info = array();
+            $apt_info['apt_details'] = $apartmentDao->getAptInfoByID($apartmentKey);
+            $apt_info['units'] = $apartmentDao->getAptUnitsByKey($apartmentKey);
+            $this->view($apartmentKey, $apt_info);
+        }
     }
 
-    public function view($apartmentID) {
-        $model = new ApartmentModel();
-        $model->setApartmentId($apartmentID);
-        $dao = new ApartmentDao($model);
-//        print_r($dao->getAptDetails());
-        $this->view->data['apt_details'] = $dao->getAptDetails();
+    public function view($apartmentKey, $params = array()) {
+        if (!empty($params)) {
+            foreach ($params as $key => $value) {
+                $this->view->data[$key] = $value;
+            }
+        } else {
+            $aptDao = new ApartmentDao();
+            $this->view->data['units'] = $aptDao->getAptUnitsByKey($apartmentKey);
+            $this->view->data['apt_details'] = $aptDao->getAptInfoByKey($apartmentKey);
+        }
         $this->view->data['message'] = 'Select a Unit to Manage';
         $this->view->data['sidebar'] = 'default';
-        $this->view->data['units'] = $dao->getAllUnits();
         $this->view->render('units');
     }
     //put your code here

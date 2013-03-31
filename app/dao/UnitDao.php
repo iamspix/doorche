@@ -16,7 +16,7 @@ class UnitDao extends Dao {
 
     private $model;
 
-    public function __construct(UnitModel $model) {
+    public function __construct(UnitModel $model = null) {
         parent::__construct();
         $this->model = $model;
     }

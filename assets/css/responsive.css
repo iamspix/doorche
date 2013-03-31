@@ -1,8 +1,13 @@
 @media only screen and (min-width: 1200px) and (max-width: 1360px) {
-    #add-tenant > form > input, #add-tenant > form > select {
-        margin-left: 20px;
-        float: left;
-        width: 45%;
+
+    #add-tenant, #lease-unit {
+        width: 400px;
+    }
+
+    #add-tenant > form > input, #add-tenant > form > select
+    #lease-unit > form > input, #lease-unit > form > select {
+        margin: 8px auto;
+        width: 84%;
     }
 }
 

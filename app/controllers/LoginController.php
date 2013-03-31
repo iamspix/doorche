@@ -11,8 +11,7 @@
  * @license             joeyhipolito.com
  * @copyright           Copyright (c) 2013
  */
-include APPPATH . 'models' . DS . 'LoginModel' . EXT;
-include APPPATH . 'dao' . DS . 'LoginDAO' . EXT;
+
 class LoginController extends Controller {
     // further improvement : i'll fetch ip_address, user_agent and session_id from LoginView and use it
     private $template;

@@ -16,7 +16,7 @@ class ApartmentDao extends Dao {
 
     private $model;
 
-    public function __construct(ApartmentModel $model) {
+    public function __construct(ApartmentModel $model = null) {
         parent::__construct();
         $this->model = $model;
     }
@@ -26,52 +26,48 @@ class ApartmentDao extends Dao {
         return $this->db->fetchAll($query);
     }
 
-    public function getAptDetails() {
+    public function getAptInfoByKey($apt_key) {
         $query = "SELECT tbl_apartments.apartment_id, tbl_apartments.apartment_key , tbl_apartments.address,
                          tbl_users.firstname, tbl_users.lastname, tbl_users.mobile_number,
                          tbl_users.email_address
                  FROM tbl_apartments
                  LEFT JOIN tbl_users ON tbl_apartments.building_manager = tbl_users.id
-                 WHERE tbl_apartments.apartment_key = :apt_id";
-        $bind = array(':apt_id' => $this->model->getApartmentId());
+                 WHERE tbl_apartments.apartment_key = :apt_key";
+        $bind = array(':apt_key' => $apt_key);
         return $this->db->fetch($query, $bind);
     }
 
-    public function getAllUnits() {
+    public function getAptUnitsByKey($apt_key) {
         $query = "SELECT * FROM tbl_units
                  JOIN tbl_apartments ON tbl_units.apartment_id = tbl_apartments.apartment_id
                  WHERE apartment_key = :key";
-        $bind = array(':key' => $this->model->getApartmentId());
+        $bind = array(':key' => $apt_key);
         return $this->db->fetchAll($query, $bind);
     }
 
-    public function getManager() {
+    public function getAptMgrByKey($apt_key) {
         $query = "SELECT building_manager FROM tbl_apartments WHERE apartment_key = :key";
-        $bind = array(':key' => $this->model->getApartmentId());
-        return $this->db->fetch($query, $bind);
+        $bind = array(':key' => $apt_key);
+        $result = $this->db->fethc($query, $bind);
+        return $result['building_manager'];
     }
 
-    public function getApartmentKeyViaManager() {
-        $query = "SELECT tbl_apartments.apartment_key FROM tbl_apartments
-                  JOIN tbl_users ON tbl_users.username = tbl_apartments.building_manager
-                  WHERE tbl_users.username = :manager";
-        $bind = array(':manager' => $this->model->getBuildingManager());
-        return $this->db->fetch($query, $bind);
+    public function getAptKeyByManager($mgr_username) {
+        $query = "SELECT tbl_apartments.apartment_key
+                  FROM tbl_apartments
+                  JOIN tbl_users ON tbl_apartments.building_manager = tbl_users.id
+                  WHERE tbl_users.username = :user";
+        $params = array(':user' => $mgr_username);
+        $result = $this->db->fetch($query, $params);
+        return $result['apartment_key'];
     }
 
-    public function getKeyViaManager() {
-        $query = "SELECT tbl_apartments.apartment_key, tbl_apartments.apartment_id FROM tbl_apartments
-                  JOIN tbl_users ON tbl_users.id = tbl_apartments.building_manager
-                  WHERE tbl_users.username = :manager";
-        $bind = array(':manager' => $this->model->getBuildingManager());
-        return $this->db->fetch($query, $bind);
-    }
-
-    public function getAptIdByKey() {
+    public function getIDbyKey($key) {
         $query = "SELECT apartment_id FROM tbl_apartments WHERE apartment_key = :key";
-        $bind = array(':key' => $this->model->getApartmentKey());
+        $bind = array(':key' => $key);
 
-        return $this->db->fetch($query, $bind);
+        $result = $this->db->fetch($query, $bind);
+        return $result['apartment_id'];
     }
 }
 

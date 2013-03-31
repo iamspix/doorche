@@ -1,4 +1,6 @@
-<?php defined('SYSPATH') or die ('No Direct Access Allowed!');
+<?php
+
+defined('SYSPATH') or die ('No Direct Access Allowed!');
 
 // -- Environment setup --------------------------------------------------------
 
@@ -59,7 +61,7 @@ if (file_exists($classFile)) {
         $controller = new $class();
     }
 
-    $controller = new Decorator($controller);
+//    $controller = new Decorator($controller);
     $controller->{$method}($id);
 } else {
     notfound();

@@ -56,13 +56,13 @@ class LeaseDao extends Dao {
             ':deposit' => $this->model->getDeposit(),
             ':rentDate' => $this->model->getRentDate()
             );
-        $this->db->insert($query, $bind);
+        $this->db->query($query, $bind);
 
         $query = 'UPDATE tbl_tenants SET tbl_tenants.status = 2 WHERE tbl_tenants.tenant_id = :id';
         $bind  = array(
             ':id' => $this->model->getTenantId()
         );
-        $this->db->update($query, $bind);
+        $this->db->query($query, $bind);
     }
 
 }

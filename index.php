@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The directory that contains the application specific resources
  * The application directory MUST contain the bootstrap.php file
@@ -7,7 +6,7 @@
 
 $app = 'app';
 
-/** 
+/**
  * The directory that contains the system specific resources especially'
  * the routing mechanism
  */
@@ -51,7 +50,7 @@ define('SYSPATH', realpath($system).DS);
 unset($app, $system);
 
 // require config file that contains user set configurations
-// require APPPATH . 'config' . EXT; -> saved for 
+// require APPPATH . 'config' . EXT; -> saved for
 
 // require function file that contains common helper functions that will be used
 require APPPATH . 'functions' . EXT;

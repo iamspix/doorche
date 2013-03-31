@@ -12,13 +12,6 @@
  * @copyright           Copyright (c) 2013
  */
 
-include APPPATH . 'models' . DS . 'ApartmentModel' . EXT;
-include APPPATH . 'models' . DS . 'UnitModel' . EXT;
-include APPPATH . 'models' . DS . 'LeaseModel' . EXT;
-include APPPATH . 'dao' . DS . 'ApartmentDao' . EXT;
-include APPPATH . 'dao' . DS . 'UnitDao' . EXT;
-include APPPATH . 'dao' . DS . 'LeaseDao' . EXT;
-
 class UnitsController extends Controller {
     private $template;
 
@@ -32,21 +25,12 @@ class UnitsController extends Controller {
         // if ADMIN
 
         // if MANAGER
-        $apartmentModel = new ApartmentModel();
-        $apartmentModel->setBuildingManager($_SESSION['username']);
 
         // select apartment details using manager
-        $apartmentDao = new ApartmentDao($apartmentModel);
-        $apartmentKey = $apartmentDao->getKeyViaManager();
-        print_r($apartmentKey);
-
-        // set apartmentId using key
-        $unitModel = new UnitModel();
-        $unitModel->setApartmentID($apartmentKey['apartment_id']);
-
-        // select * apartments where id = apartment_id
-        $unitDao = new UnitDao($unitModel);
-        $this->view->data['units'] = $unitDao->getAllUnitsViaApartmentId();
+        $apartmentDao = new ApartmentDao();
+        $apartmentKey = $apartmentDao->getAptKeyByManager($_SESSION['username']);
+        $this->view->data['message'] = 'Select a Unit to Manage';
+        $this->view->data['units'] = $apartmentDao->getAptUnitsByKey($apartmentKey);
 
         $this->view->render($this->template);
     }
@@ -86,7 +70,7 @@ class UnitsController extends Controller {
         $leaseDao = new LeaseDao($leaseModel);
         $leaseDao->leaseUnit();
 
-        header('Location:' . base_url() . 'reports/genReportUponReg/' . $leaseModel->getTenantId());
+        header('Location:' . base_url() . 'reports/lease/' . $leaseModel->getTenantId());
     }
 
     public function rent($unitId) {
