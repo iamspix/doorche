@@ -1,0 +1,915 @@
+/* 
+    Document   : styles
+    Created on : Mar 9, 2013, 2:33:20 AM
+    Author     : Jose Marcelius Hipolito <hi@joeyhipolito.com>
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'), 
+         url('../fonts/proximanova-regular-webfont.woff') format('woff'), 
+         url('../fonts/proximanova-regular-webfont.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: 'ProximaNova Light';
+    src: url('../fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'), 
+         url('../fonts/proximanova-light-webfont.woff') format('woff'), 
+         url('../fonts/proximanova-light-webfont.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: 'ProximaNova Bold';
+    src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'), 
+         url('../fonts/proximanova-bold-webfont.woff') format('woff'), 
+         url('../fonts/proximanova-bold-webfont.ttf')  format('truetype');
+}
+
+
+@font-face {
+    font-family: 'ProximaNova Semibold';
+    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'), 
+         url('../fonts/proximanova-semibold-webfont.woff') format('woff'), 
+         url('../fonts/proximanova-semibold-webfont.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: 'Coda';
+    src: url('../fonts/Coda-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Coda Bold';
+    src: url('../fonts/Coda-Heavy.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Coda ItalicBold';
+    src: url('../fonts/Coda-Caption-Heavy.ttf') format('truetype');
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: url('../img/container-bg.jpg') center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    font: 14px ProximaNova;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    margin: 0;
+}
+
+a, a:link, a:active, a:visited {
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+#top-bar {
+    height: 150px;
+    position: relative;
+}
+
+#top-bar > .branding {
+    background-image: url('../img/top-bar-bg.png'), -moz-linear-gradient(top, #555, #373737);
+    background-image: url('../img/top-bar-bg.png'), -webkit-gradient(linear, 0 0, 0 100%, from(#555), to(#373737));
+    background-image: url('../img/top-bar-bg.png'), -webkit-linear-gradient(top, #555, #373737);
+    background-image: url('../img/top-bar-bg.png'), -o-linear-gradient(top, #555, #373737);
+    background-image: url('../img/top-bar-bg.png'), linear-gradient(to bottom, #555, #373737);
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-top: 8px solid #e5c700;
+    border-bottom: 1px solid #222;
+    box-shadow: 0 1px #656565;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+
+#top-bar > .branding > .company-identity {
+    height: 100%;
+}
+
+#top-bar > .branding > .company-identity .company-name {
+    height: 100%;
+}
+
+#top-bar > .branding > .company-identity h1 {
+    color: #222;
+    font-family: 'ProximaNova Bold';
+    line-height: 2.5em;
+    margin-left: 30px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.1);
+}
+
+#primary-nav {
+    background-image: -moz-linear-gradient(top, #505050, #464646);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#505050), to(#464646));
+    background-image: -webkit-linear-gradient(top, #505050, #464646);
+    background-image: -o-linear-gradient(top, #505050, #464646);
+    background-image: linear-gradient(to bottom, #505050, #464646);
+    height: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+#top-bar .app-logo {
+    height: 50px;
+    margin-top: -25px;
+    position: absolute;
+    right: 34px;
+    top: 50%;
+    width: 90px;
+}
+
+#top-bar .app-logo img {
+    width: 90px;
+    height: 50px;
+}
+
+#top-calendar {
+    border-left: 1px solid #656565;
+    box-shadow: -1px 0 0 #222;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 100%;
+    padding: 4px;
+    width: auto;
+}
+
+#top-calendar > a {
+    display: block;
+}
+
+#top-navigation {
+    height: 100%;
+    list-style: none;
+    margin: 0 10px;
+}
+
+#top-navigation > li {
+    border-left: 1px solid #656565;
+    box-shadow: -1px 0 0 #222;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: #fff;
+    display: inline-block;
+    height: 100%;
+    line-height: 3.8em;
+    width: 100px;
+    text-align: center;
+}
+
+#top-navigation > li a {
+    display: block;
+    height: 100%;
+    -webkit-transition: 0.3s ease-in-out all;
+       -moz-transition: 0.3s ease-in-out all;
+         -o-transition: 0.3s ease-in-out all;
+            transition: 0.3s ease-in-out all;
+}
+
+#top-navigation > li a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+#container {
+    position: absolute;
+    margin-top: 150px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#content, #sidebar {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 100%;
+    min-height: 100%;
+}
+
+#content {
+    padding: 25px;
+    position: relative;
+    margin-left: 300px;
+}
+
+#sidebar {
+    background: rgba(0,0,0,0.8);
+    border-right: 1px solid rgba(255,255,255,0.3);
+    float: left;
+    min-width: 300px;
+}
+
+.no-sidebar {
+    margin-left: 0 !important;
+}
+
+#sidebar > .drag-to-hide {
+    background-image: url('../img/sprites.png');
+    background-color: #e5c700;
+    background-position: 380px 1px;
+    border-top: 1px solid rgba(255,255,255, 0.7);
+    cursor: s-resize;
+    height: 10px;
+    overflow: hidden;
+}
+
+#apartment-info {
+    background: rgba(255,255,255,0.75);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 160px;
+    padding: 20px;
+    position: relative;
+}
+
+#apartment-info img.apartment-image {
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    width: 92px;
+}
+
+#apartment-details {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: #222;
+    height: 100%;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+#apartment-details > .apartment-number {
+    border-bottom: 1px solid rgba(255,255,255,1);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+#apartment-details > section {
+    font-family: 'ProximaNova Semibold';
+    padding: 4px;
+    text-align: right;
+}
+
+#apartment-details > section:last-child {
+    border-bottom: 1px solid rgba(255,255,255,1);
+}
+
+#apartment-details > section span {
+    font-family: 'ProximaNova';
+}
+
+#manage-nav {
+    padding-top: 10px;
+}
+
+#manage-nav > h1 {
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15);
+    border-bottom: 1px solid rgba(0,0,0,1);
+    color: #fff;
+    font: 1.4em ProximaNova Semibold;
+    letter-spacing: 12px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#manage-nav > .side-nav {
+    list-style: none;
+    width: 84%;
+}
+
+#manage-nav > .side-nav > li {
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15);
+    transition: ease-in-out 0.3s all;
+    -webkit-transition: ease-in-out 0.3s all;
+    -moz-transition: ease-in-out 0.3s all;
+}
+
+#manage-nav > .side-nav > li:hover {
+    background: rgba(75,75,75,0.3);
+}
+
+#manage-nav > .side-nav > li a {
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    padding: 5px 0;
+    margin: 0 10px;
+}
+
+#manage-nav > .side-nav > li > a span {
+    display: block;
+    font: 1em Coda, Arial, Segoe Ui Light;
+    height: 100%;
+    line-height: 45px;
+    padding-left: 36px;
+    background-image: url('../img/sprites.png');
+    background-repeat: no-repeat;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+#notification-bar {
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 1px #fff;
+    height: 140px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 99;
+}
+
+#notification-bar .message {
+    height: 100%;
+}
+
+#notification-bar > .message h1 {
+    font-family: ProximaNova Light;
+    line-height: 3.5em;
+    text-align: center;
+}
+
+#notification-bar > .close {
+    color: #555;
+    display: block;
+    font: 1.3em Segoe Ui, Arial, sans-serif;
+    font-weight: bold;
+    height: 26px;
+    width: 26px;
+    position: absolute;
+    line-height: 26px;
+    top: 0;
+    right: 0;
+    opacity: 1 !important;
+    text-align: center;
+}
+
+#notification-bar > .close:hover {
+    background: #fff;
+    text-decoration: none;
+}
+
+/* LOGIN STYLES */
+#login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 240px;
+    margin-left: -225px;
+    margin-top: -10%;
+    width: 550px;
+}
+
+#login > .avatar {
+    height: 160px;
+    width: 180px;
+    position: absolute;
+    top: 50%;
+    margin-top: -90px;
+    z-index: 2;
+}
+
+#login > .avatar img {
+    height: 180px;
+    width: 160px;
+}
+
+
+#login input[type='text'], #login input[type='password'] {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #ccc;
+    outline: none;
+}
+
+#login-info {
+    background: rgba(0,0,0,0.8);
+    border-radius: 4px;
+    position: absolute;
+    height: 100px;
+    top: 50%;
+    margin-top: -50px;
+    width: 80%;
+    right: 0;
+}
+
+#username-block, #password-block {
+    height: 50px;
+    padding-left: 60px;
+}
+
+#username-block {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.9);
+}
+
+#username, #password {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+}
+
+#frm-login > input[type='submit'] {
+    background: #e5c700;
+    border: 0;
+    box-shadow: 0;
+    height: 40px;
+    margin-top: 40px;
+    width: 100%;
+    outline: 0;
+}
+
+/* APARTMENTS STYLES */
+#apartments {
+    height: 250px;
+    position: absolute;
+    text-align: center;
+    margin-top: -125px;
+    top: 50%;
+    left: 0;
+    width: 100%;
+}
+
+#apartments > .apartment {
+    display: inline-block;
+    margin: 10px;
+    position: relative;
+}
+
+#apartments > .apartment .bubble {
+    right: 40px;
+    top: -40px;
+}
+
+#apartments > .apartment .apartment-number {
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    display: block;
+    font-size: 1.3em;
+    position: absolute;
+    left: 50%;
+    margin-left: -35%;
+    bottom: 20%;
+    text-transform: uppercase;
+    width: 70%;
+}
+
+/* MANAGE UNITS STYLES */
+
+#content > .unit-list {
+    height: 100%;
+    width: 100%;
+}
+
+#filter-container {
+    height: 16%;
+    position: relative;
+}
+
+#units {
+    height: 84%;
+}
+
+#filter-container > div > h1 {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+#filter-container > div > .options {
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 3px;
+    box-shadow: 0 3px 0 #000, 0 -1px #222 inset;
+    cursor: pointer;
+    height: 30px;
+    position: relative;
+    width: 280px;
+    z-index: 999;
+}
+
+#filter-container > div > .options .drop-icon {
+    background-image: url('../img/sprites.png');
+    background-position: 7px -340px;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    box-shadow: -1px 0 0 rgba(0,0,0,1);
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+}
+
+#filter-container > div > .options ul {
+    margin-left: 0;
+    margin-top: 30px;
+    width: auto;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+#filter-container > div > .options:hover ul {
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    cursor: pointer;
+    height: auto;
+    opacity: 1;
+}
+
+#filter-container > div > .options ul > li {
+    background: rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    height: 40px;
+    line-height: 3em;
+    margin: 0;
+    padding-left: 10px;
+    position: relative;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    width: 100%;
+}
+
+#filter-container > div > .options ul > li:hover {
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    text-shadow: 0 1px 0 #000;
+}
+
+#filter-container > div > .options ul > li:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+#units > .unit-holder {
+    display: inline-block;
+    height: 140px;
+    position: relative;
+    width: 140px;
+}
+
+#units > .unit-holder > .bubble {
+    height: 30px;
+    right: 0;
+    top: 0;
+    width: 40px;
+}
+
+#units > .unit-holder > .notif-count {
+    font-size: 1.2em;
+    line-height: 1.8em;
+}
+
+#units > .unit-holder > .unit {
+    background: url('../img/unit-bg.png');
+    height: 110px;
+    width: 110px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -55px;
+}
+
+#units > .unit-holder > .unit span {
+    color: #fff;
+    display: block;
+    font-size: 3em;
+    height: 100%;
+    line-height: 2.8em;
+    text-align: center;
+    width: 100%;
+}
+
+/* UNIT SELECTION VIEW */
+
+#unit-view {
+    background-image: url('../img/unit-selection-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 575px;
+    margin: auto;
+    position: relative;
+    width: 575px;
+}
+
+#unit-view > .unit-number {
+    background: #fff;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.9);
+    font: 2.8em ProximaNova Semibold;
+    line-height: 1.8em;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    margin-left: -90px;
+    width: 180px;
+    transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+}
+
+#unit-view > .tenant-list {
+    border-radius: 5px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    height: 310px;
+    padding: 22px 30px;
+    position: absolute;
+    top: 127px;
+    width: 100%;
+}
+
+#unit-view > .tenant-list > a {
+    display: block;
+    margin: 0 auto 10px auto;
+    margin-bottom: 10px;
+}
+
+#unit-view > .tenant-list > .tenant {
+    transition: 0.2s all ease-in-out;
+    -webkit-transition: 0.2s all ease-in-out;
+    -moz-transition: 0.2s all ease-in-out;
+    -o-transition: 0.2s all ease-in-out;
+}
+
+#unit-view > .tenant-list > .tenant, #unit-view > .tenant-list > .add-tenant {
+    background: rgba(0,0,0,0.30);
+    border-left: 4px solid #e5c700;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 80px;
+    padding: 5px 5px 5px 0;
+    position: relative;
+    width: 80%;
+}
+
+#unit-view > .tenant-list > .tenant img {
+    background: rgba(255,255,255,0.1);
+    height: 72px;
+    padding: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 72px;
+}
+
+#unit-view > .tenant-list > .add-tenant {
+    border: 3px dashed #ccc;
+    color: #ccc;
+    display: block;
+    opacity: 0.1;
+    transition: 0.2s all ease-in-out;
+    -webkit-transition: 0.2s all ease-in-out;
+    -moz-transition: 0.2s all ease-in-out;
+    -o-transition: 0.2s all ease-in-out;
+}
+
+#unit-view > .tenant-list > .add-tenant h1 {
+    font: 1.4em ProximaNova Semibold;
+    line-height: 3.1em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#unit-view > .tenant-list > .tenant h1 {
+    border-bottom: 1px solid rgba(0,0,0,1);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin-left: 85px;
+    text-transform: uppercase;
+}
+
+#unit-view > .tenant-list > .tenant .tenant-info {
+    background: url('../img/sprites-info.png') no-repeat;
+    color: #fff;
+    display: block;
+    height: 18px;
+    margin-left: 85px;
+    margin-top: 5px;
+    padding-left: 40px;
+     transition: 0.2s all ease-in-out;
+    -webkit-transition: 0.2s all ease-in-out;
+    -moz-transition: 0.2s all ease-in-out;
+    -o-transition: 0.2s all ease-in-out;
+}
+
+#unit-view > .tenant-list > .tenant:hover .tenant-info {
+    color: #222;
+}
+
+#unit-view > .tenant-list > .tenant .mobile {
+    background-position: 0 0;
+}
+
+#unit-view > .tenant-list > .tenant .email {
+    background-position: 0 -36px;
+}
+
+#unit-view > .tenant-list > .tenant:hover .mobile {
+    background-position: 0 -19px
+}
+
+#unit-view > .tenant-list > .tenant:hover .email {
+    background-position: 0 -53px;
+}
+
+#unit-view > .tenant-list > .tenant:hover {
+    background: rgba(255,255,255,0.8);
+}
+
+#unit-view > .tenant-list > .tenant:hover h1 {
+    color: #222;
+}
+
+#unit-view > .tenant-list > .add-tenant:hover {
+    opacity: 1;
+}
+
+/* MANAGE TENANTS STYLES */
+#add-tenant {
+    background-color: rgba(255,255,255,1);
+    background-image: -moz-linear-gradient(top, #fff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #fff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #fff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #fff, #f2f2f2);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    height: auto;
+    margin: auto;
+    padding: 40px;
+    position: relative;
+    width: 50%;
+    min-width: 300px;
+}
+
+#add-tenant > form > h1 {
+    color: #cacaca;
+    font: 2.4em ProximaNova Bold;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,1);
+    text-transform: uppercase;
+}
+
+#add-tenant > form > input, #add-tenant > form > select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: block;
+    height: 30px;
+    margin: 8px auto;
+    width: 80%;
+    
+}
+
+/* menu items */
+
+#manage-nav > .side-nav > li.menu-units > a span {
+    background-position: 0 -20px;
+}
+
+#manage-nav > .side-nav > li.menu-units:hover > a span {
+    background-position: 0 -65px;
+}
+
+#manage-nav > .side-nav > li.menu-tenants > a span {
+    background-position: 0 -110px;
+}
+
+#manage-nav > .side-nav > li.menu-tenants:hover > a span {
+    background-position: 0 -155px;
+}
+
+#manage-nav > .side-nav > li.menu-settings > a span {
+    background-position: 0 -200px;
+}
+
+#manage-nav > .side-nav > li.menu-settings:hover > a span {
+    background-position: 0 -245px;
+}
+
+/* notification bubble styles */
+
+.notif-count {
+    color: #222;
+    font-family: 'ProximaNova Semibold';
+    font-size: 2em;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    line-height: 1.5em;
+}
+
+.bubble {
+    background: #e5c700;
+    border: 1px solid #ffe400;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    display: block;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    z-index: 2;
+}
+
+.bubble:after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 10px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #e5c700 transparent;
+    display: block;
+    width: 0;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
