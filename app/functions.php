@@ -18,7 +18,7 @@ if (!function_exists('set_error_reporting')) {
 
 // -- Helper functions ---------------------------------------------------------
 /**
- * @name base_url() 
+ * @name base_url()
  * @description returns base url set in the config file
  */
 if (!function_exists('base_url')) {
@@ -28,7 +28,7 @@ if (!function_exists('base_url')) {
 }
 
 /**
- * @name asset_url() 
+ * @name asset_url()
  * @description returns asset url set in the config file
  */
 if (!function_exists('asset_url')) {
@@ -46,7 +46,7 @@ if (!function_exists('asset_url')) {
  */
 if (!function_exists('link_file')) {
     function link_file($file, $rel) {
-        
+
         if ($rel === 'script') {
             if (is_array($file)) {
                 foreach ($file as $js) {

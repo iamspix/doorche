@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : styles
     Created on : Mar 9, 2013, 2:33:20 AM
     Author     : Jose Marcelius Hipolito <hi@joeyhipolito.com>
@@ -23,30 +23,30 @@
 
 @font-face {
     font-family: 'ProximaNova';
-    src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'), 
-         url('../fonts/proximanova-regular-webfont.woff') format('woff'), 
+    src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-regular-webfont.woff') format('woff'),
          url('../fonts/proximanova-regular-webfont.ttf')  format('truetype');
 }
 
 @font-face {
     font-family: 'ProximaNova Light';
-    src: url('../fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'), 
-         url('../fonts/proximanova-light-webfont.woff') format('woff'), 
+    src: url('../fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-light-webfont.woff') format('woff'),
          url('../fonts/proximanova-light-webfont.ttf')  format('truetype');
 }
 
 @font-face {
     font-family: 'ProximaNova Bold';
-    src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'), 
-         url('../fonts/proximanova-bold-webfont.woff') format('woff'), 
+    src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-bold-webfont.woff') format('woff'),
          url('../fonts/proximanova-bold-webfont.ttf')  format('truetype');
 }
 
 
 @font-face {
     font-family: 'ProximaNova Semibold';
-    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'), 
-         url('../fonts/proximanova-semibold-webfont.woff') format('woff'), 
+    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-semibold-webfont.woff') format('woff'),
          url('../fonts/proximanova-semibold-webfont.ttf')  format('truetype');
 }
 
@@ -224,7 +224,6 @@ a:hover {
     margin-top: 150px;
     top: 0;
     bottom: 0;
-    height: 100%;
     width: 100%;
 }
 
@@ -369,11 +368,7 @@ a:hover {
 #notification-bar {
     background: rgba(255,255,255,0.9);
     box-shadow: 0 1px #fff;
-    height: 140px;
-    position: absolute;
-    right: 0;
-    left: 0;
-    z-index: 99;
+    height: 80px;
 }
 
 #notification-bar .message {
@@ -382,7 +377,7 @@ a:hover {
 
 #notification-bar > .message h1 {
     font-family: ProximaNova Light;
-    line-height: 3.5em;
+    line-height: 2em;
     text-align: center;
 }
 
@@ -408,12 +403,9 @@ a:hover {
 
 /* LOGIN STYLES */
 #login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     height: 240px;
-    margin-left: -225px;
-    margin-top: -10%;
+    margin: auto;
+    position: relative;
     width: 550px;
 }
 
@@ -834,7 +826,7 @@ a:hover {
     height: 30px;
     margin: 8px auto;
     width: 80%;
-    
+
 }
 
 /* menu items */

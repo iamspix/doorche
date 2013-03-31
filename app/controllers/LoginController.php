@@ -35,14 +35,14 @@ class LoginController extends Controller {
         $model = new LoginModel();
         $model->setUsername($this->username);
         $model->setPassword($this->password);
-
         $loginDao = new LoginDao($model);
-        if ($loginDao->login()) {
-            $session = new Session();
-        } else {
-            echo 'invalid password';
-        }
+        $loginDao->login();
 
+        $loginDao->redirect();
+    }
+
+    public function logout() {
+        session_destroy();
     }
     //put your code here
 }

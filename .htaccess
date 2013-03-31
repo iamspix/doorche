@@ -1,11 +1,16 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
+
+RewriteRule ^(.+)/$ /dbms/$1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+#RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+RewriteRule ^(.+)$ /dbms/index.php?url=$1 [QSA,L]
 
 </IfModule>
 
@@ -36,7 +41,7 @@ SetOutputFilter DEFLATE
 
    #The following lines are to avoid bugs with some browsers
      BrowserMatch ^Mozilla/4\.0[678] no-gzip
-    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html 
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 </IfModule>
 
 AddDefaultCharset UTF-8

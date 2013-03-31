@@ -4,7 +4,7 @@
 
 /**
  * Set default time zone
- * 
+ *
  * @link - http://www.php.net/manual/timezones
  */
 date_default_timezone_set('Asia/Hong_Kong');
@@ -33,8 +33,10 @@ $router->map();
 
 $w = explode('_', $router->getController());
 foreach ($w as $key => $value) {
-   $w[$key] = ucfirst($value); 
+   $w[$key] = ucfirst($value);
 }
+// odd placement of session_start
+session_start();
 
 $class = implode('', $w) . 'Controller';
 $classFile = APPPATH . 'controllers' . DS . $class . EXT;
@@ -44,18 +46,22 @@ $viewFile = APPPATH . 'views' . DS . $view . EXT;
 $method = $router->getAction();
 $id = $router->getId();
 
+// decorate!!! wrap it up!!
+//$class = new Decorator($class);
+
 if (file_exists($classFile)) {
     require $classFile;
-    
+
     if (file_exists($viewFile)) {
         require $viewFile;
         $controller = new $class(new $view());
     } else {
         $controller = new $class();
     }
-    
+
+    $controller = new Decorator($controller);
     $controller->{$method}($id);
-    
+
 } else {
     notfound();
 }

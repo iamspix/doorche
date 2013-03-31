@@ -5,7 +5,7 @@
  * Type : Class
  * [Add a long description of the file (1 sentence) and then delete my example]
  * Example: A PHP file template created to standardize code.
- * 
+ *
  * @package		dbms
  * @author              Jose Marcelius Hipolito <hi@joeyhipolito.com>
  * @license             University of the East Research and Development Unit
@@ -13,14 +13,15 @@
  */
 
 class LoginDao extends Dao {
-    
+
     private $model;
-    
+    private $success = false;
+
     public function __construct(LoginModel $model) {
         parent::__construct();
         $this->model = $model;
     }
-    
+
     public function login() {
         // validate login only check if username and password combination is correct
         // this is much safer than checking if the username and password doest not
@@ -30,7 +31,24 @@ class LoginDao extends Dao {
             ':usr' => $this->model->getUsername(),
             ':pwd' => md5($this->model->getPassword()) // this is quite not so strong, and I want this to be salted
             );
-        return  $this->db->num_rows($query, $bindVal) > 0 ? true : false;
+//        return  $this->db->num_rows($query, $bindVal) > 0 ? true : false;
+        if ($this->db->num_rows($query, $bindVal) > 0) {
+
+            $this->setSession();
+            $this->success = true;
+        } else {
+            $this->success = false;
+        }
+    }
+
+    public function setSession() {
+        $_SESSION['username'] = $this->model->getUsername();
+    }
+
+    public function redirect() {
+        if ($this->success) {
+            header('Location:' . base_url() . 'admin');
+        }
     }
 }
 
