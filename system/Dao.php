@@ -16,7 +16,7 @@ class Dao {
     protected $db = null;
 
     public function __construct() {
-        $this->db = new Database('mysql:host=localhost;dbname=joeyhipo_doorch', 'joeyhipo_spixy', 'i4m$piX_XI');
+        $this->db = new Database('mysql:host=localhost;dbname=doorche', 'root', '');
     }
     //put your code here
 }

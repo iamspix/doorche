@@ -3,7 +3,7 @@
     <div id="add-tenant">
         <form method="POST" action="<?php echo base_url();?>tenants/register">
             <h1>Register a Tenant</h1>
-            <input name="lastname" type="text" placeholder="Lastname*" maxlength="128" required>
+            <input name="lastname" type="text" placeholder="Lastname*" maxlength="128" required autofocus>
             <input name="firstname" type="text" placeholder="Firstname*" maxlength="128" required>
             <input name="mobile" type="text" placeholder="Mobile Number*" pattern="((\+63)|(63)|0)?\d{10}" required>
             <select name="gender" required>

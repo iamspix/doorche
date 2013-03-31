@@ -15,7 +15,7 @@
 class LeaseDao extends Dao {
 
     private $model;
-    public function __construct(LeaseModel $model) {
+    public function __construct(LeaseModel $model = null) {
         parent::__construct();
         $this->model = $model;
     }
@@ -28,7 +28,7 @@ class LeaseDao extends Dao {
         return $this->db->fetch($query, $bind);
     }
 
-    public function getPostLeaseTenantDetails() {
+    public function getPostLeaseTenantDetails($tenant_id) {
         $query = "SELECT
                     tbl_lease.tenant_id,
                     tbl_lease.start_date,
@@ -42,7 +42,7 @@ class LeaseDao extends Dao {
                  JOIN tbl_units ON tbl_tenants.unit_id = tbl_units.unit_id
                  JOIN tbl_apartments ON tbl_units.apartment_id = tbl_apartments.apartment_id
                  WHERE tbl_lease.tenant_id = :tenant_id";
-        $bind = array(':tenant_id' => $this->model->getTenantId());
+        $bind = array(':tenant_id' => $tenant_id);
 
         return $this->db->fetch($query, $bind);
     }

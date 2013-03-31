@@ -25,7 +25,7 @@ if (!function_exists('set_error_reporting')) {
  */
 if (!function_exists('base_url')) {
     function base_url() {
-        return 'http://joeyhipolito.com/projects/dbms/';
+        return 'http://localhost/dbms/';
     }
 }
 
@@ -35,7 +35,7 @@ if (!function_exists('base_url')) {
  */
 if (!function_exists('asset_url')) {
     function asset_url() {
-        return 'http://joeyhipolito.com/projects/dbms/assets/';
+        return 'http://localhost/dbms/assets/';
     }
 }
 

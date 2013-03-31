@@ -31,7 +31,7 @@ class ApartmentsController extends Controller {
             $apartmentDao = new ApartmentDao();
             $apartmentKey = $apartmentDao->getAptKeyByManager($_SESSION['username']);
             $apt_info = array();
-            $apt_info['apt_details'] = $apartmentDao->getAptInfoByID($apartmentKey);
+            $apt_info['apt_details'] = $apartmentDao->getAptInfoByKey($apartmentKey);
             $apt_info['units'] = $apartmentDao->getAptUnitsByKey($apartmentKey);
             $this->view($apartmentKey, $apt_info);
         }

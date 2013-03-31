@@ -37,14 +37,14 @@ class UnitDao extends Dao {
 
     public function getAllTenants() {
         $query = "SELECT * FROM tbl_tenants
-                  WHERE tbl_tenants.unit_id = :unit";
+                  WHERE tbl_tenants.unit_id = :unit AND tbl_tenants.status = 2";
         $bind = array(':unit' => $this->model->getUnitID());
 
         return $this->db->fetchAll($query, $bind);
     }
 
     public function getTenantCount() {
-        $query = "SELECT tenant_id FROM tbl_tenants WHERE unit_id = :unit";
+        $query = "SELECT tenant_id FROM tbl_tenants WHERE unit_id = :unit AND tbl_tenants.status = 2";
         $bind = array(':unit' => $this->model->getUnitID());
 
         return $this->db->num_rows($query, $bind);

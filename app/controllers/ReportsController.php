@@ -16,10 +16,8 @@ include ROOT . 'libs/fpdf/fpdf.php';
 class ReportsController extends Controller {
 
     public function lease($tenantID) {
-        $leaseModel = new LeaseModel();
-        $leaseModel->setTenantId($tenantID);
-        $leaseDao = new LeaseDao($leaseModel);
-        $info = $leaseDao->getPostLeaseTenantDetails();
+        $leaseDao = new LeaseDao();
+        $info = $leaseDao->getPostLeaseTenantDetails($tenantID);
         $pdf = new FPDF();
         $pdf->AddPage();
         $pdf->Image(asset_url() . 'img/post-reg-report.png', 0, 0,200, 200);
@@ -29,11 +27,6 @@ class ReportsController extends Controller {
         $pdf->Ln(30);
         $pdf->Cell(20, 0, "Date: ");
         $pdf->Cell(40, 0, $info['start_date']);
-        $fields = '
-        Name
-        Unit #
-        Apt #
-        Deposit';
 
         $pdf->SetFont('Arial', 'B', 14);
         $pdf->Ln(10);
