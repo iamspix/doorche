@@ -25,7 +25,8 @@ if (!function_exists('set_error_reporting')) {
  */
 if (!function_exists('base_url')) {
     function base_url() {
-        return 'http://localhost/dbms/';
+        $c = new Config();
+        return $c->baseurl;
     }
 }
 
@@ -35,7 +36,8 @@ if (!function_exists('base_url')) {
  */
 if (!function_exists('asset_url')) {
     function asset_url() {
-        return 'http://localhost/dbms/assets/';
+        $c = new Config();
+        return $c->asseturl;
     }
 }
 
@@ -48,25 +50,17 @@ if (!function_exists('asset_url')) {
  */
 if (!function_exists('link_file')) {
     function link_file($file, $rel) {
-
+        if (!is_array($file)) { $file = array($file); }
         if ($rel === 'script') {
-            if (is_array($file)) {
-                foreach ($file as $js) {
-                    echo '<script src="' . asset_url() . 'js/' . $js . '.js"></script>' . "\n";
-                }
-            } else {
-                echo '<script src="' . asset_url() . 'js/' . $file . '.js"></script>' . "\n";
+            foreach ($file as $js) {
+                echo '<script src="' . asset_url() . 'js/' . $js . '.js"></script>' . "\n";
             }
         } elseif ($rel === 'icon') {
-            echo '<link rel="shortcut icon" href="' . asset_url() . 'images/icons/' . $file . '.ico">'. "\n";
+            foreach ($file as $ico)
+                echo '<link rel="shortcut icon" href="' . asset_url() . 'images/icons/' . $ico . '.ico">'. "\n";
         } else {
-            if (is_array($file)) {
-                foreach ($file as $css) {
-                    echo '<link rel="' . $rel . '" href="' . asset_url() . 'css/' . $css . '.css">'. "\n";
-                }
-            } else {
-                echo '<link rel="' . $rel . '" href="' . asset_url() . 'css/' . $file . '.css">'. "\n";
-            }
+            foreach ($file as $css)
+                echo '<link rel="' . $rel . '" href="' . asset_url() . 'css/' . $css . '.css">'. "\n";
         }
     }
 }
@@ -78,6 +72,14 @@ if (!function_exists('notfound')) {
     }
 }
 
+// output reports
+if (!function_exists('output_report')) {
+    function output_report($template) {
+        ob_start();
+        include($template);
+        return ob_end_clean();
+    }
+}
 
 // enable general functions files
 set_error_reporting();

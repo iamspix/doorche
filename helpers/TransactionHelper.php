@@ -14,28 +14,35 @@
 
 class TransactionHelper extends Dao implements Helper {
 
-    public function generateID($param) {
-        $tpl = 'A-D-T';
+    public function generateID($aptKey) {
+        $tpl = 'D-A-T';
         $tpl_len = strlen($tpl);
-        $lastTransId = intval(substr($this->getLastTransId, 6));
-        $zeropadded = '00000';
-        $aptCode = 'FUE'; //tatanggap ng apartment code. 587, etc. yung fuentes, fue na lang.
+        $lastTransId = intval(substr($this->getLastTransId(), 9));
+        $newTransId = $lastTransId + 1;
+        $zeropadded = '000000';
+        $aptCode = $aptKey; //tatanggap ng apartment code. 587, etc. yung fuentes, fue na lang.
         $transid = '';
-        for ($i = 0; $i < $templen; $i++) {
-            $last = substr($zeropadded, 0, 5 - strlen($transcount)) . $transcount;
-            switch ($template[$i]) {
+        for ($i = 0; $i < $tpl_len; $i++) {
+            $last = substr($zeropadded, 0, 6 - strlen($newTransId)) . $newTransId;
+            switch ($tpl[$i]) {
                 case 'A': $transid .= $aptCode;
                     break;
                 case 'D': $transid .= date('y') . date('m') . date('d');
                     break;
                 case 'T': $transid .= $last;
                     break;
-                case '-': $transid .= ' ';
+                case '-': $transid .= '';
                     break;
             }
             //$transcount += 1;
         }
         return $transid;
+    }
+
+    public function getLastTransId() {
+        $q = "SELECT MAX(transaction_id) FROM tbl_transactions ORDER BY transaction_id ASC";
+        $result = $this->db->fetch($q);
+        return $result['MAX(transaction_id)'];
     }
 }
 

@@ -72,6 +72,14 @@ class View {
         extract($this->data);
         require $this->templatePath;
     }
+
+    public function output($template) {
+        $this->setTemplate($template);
+        extract($this->data);
+        ob_start();
+        include $this->templatePath;
+        return ob_get_clean();
+    }
 }
 
 /* End of file View.php */

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <app>
+        <title>Some Title</title>
+        <baseurl>http://localhost/dbms/</baseurl>
+        <asseturl>http://localhost/dbms/assets/</asseturl>
+    </app>
+    <database>
+        <dbtype>mysql</dbtype>
+        <dbhost>localhost</dbhost>
+        <dbname>doorche</dbname>
+        <dbuser>root</dbuser>
+        <dbpass></dbpass>
+    </database>
+</config>

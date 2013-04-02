@@ -9,6 +9,7 @@ if (!function_exists('doorche_autoload')) {
             SYSPATH,
             ROOT . 'libs',
             ROOT . 'helpers',
+            ROOT . 'services',
             APPPATH . 'models',
             APPPATH . 'dao'
         );

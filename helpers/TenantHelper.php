@@ -42,7 +42,7 @@ class TenantHelper extends Dao implements Helper {
     }
 
     public function getLastTenantID() {
-        $q = "SELECT MAX(tenant_id) FROM tbl_tenants";
+        $q = "SELECT MAX(tenant_id) FROM tbl_tenants ORDER BY tenant_id ASC";
         $result = $this->db->fetch($q);
         return $result['MAX(tenant_id)'];
     }

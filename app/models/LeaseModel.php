@@ -21,6 +21,8 @@ class LeaseModel {
     private $balance;
     private $advance;
     private $rental_date;
+    private $transaction_type;
+    private $transaction_id;
 
     public function setTenantId($id) {
         $this->tenant_id = $id;
@@ -76,6 +78,22 @@ class LeaseModel {
 
     public function getRentDate() {
         return $this->rental_date;
+    }
+
+    public function setTransactionType($type) {
+        $this->transaction_type = $type;
+    }
+
+    public function getTransactionType() {
+        return $this->transaction_type;
+    }
+
+    public function setTransactionID($transaction_id) {
+        $this->transaction_id = $transaction_id;
+    }
+
+    public function getTransactionID() {
+        return $this->transaction_id;
     }
 
 }

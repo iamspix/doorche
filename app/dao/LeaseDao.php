@@ -14,16 +14,19 @@
 
 class LeaseDao extends Dao {
 
-    private $model;
-    public function __construct(LeaseModel $model = null) {
+    private $leaseModel;
+    private $transModel;
+
+    public function __construct(LeaseModel $leaseModel = null, TransactionsModel $transModel = null) {
         parent::__construct();
-        $this->model = $model;
+        $this->leaseModel = $leaseModel;
+        $this->transModel = $transModel;
     }
 
-    public function getPreLeaseTenantDetails() {
+    public function getPreLeaseTenantDetails($tenant_id) {
         $query = "SELECT * FROM tbl_tenants
                   WHERE tbl_tenants.tenant_id = :tenant";
-        $bind = array(':tenant' => $this->model->getTenantId());
+        $bind = array(':tenant' => $tenant_id);
 
         return $this->db->fetch($query, $bind);
     }
@@ -48,21 +51,73 @@ class LeaseDao extends Dao {
     }
 
     public function leaseUnit() {
-        $query = "INSERT INTO tbl_lease(tenant_id, start_date, security_deposit, rental_date)
-                  VALUES(:tenant, :start, :deposit, :rentDate)";
-        $bind = array(
-            ':tenant' => $this->model->getTenantId(),
-            ':start'  => $this->model->getStartDate(),
-            ':deposit' => $this->model->getDeposit(),
-            ':rentDate' => $this->model->getRentDate()
-            );
-        $this->db->query($query, $bind);
+        // get connection
+        $con = $this->db->getConnection();
 
-        $query = 'UPDATE tbl_tenants SET tbl_tenants.status = 2 WHERE tbl_tenants.tenant_id = :id';
-        $bind  = array(
-            ':id' => $this->model->getTenantId()
-        );
-        $this->db->query($query, $bind);
+        $con->beginTransaction();
+
+            // first action - generate transaction infos
+            $query = "INSERT INTO tbl_transactions(
+                        transaction_id, transaction_date, transaction_cost, received_by, received_from
+                      )
+                      VALUES(
+                        :trans_id, :trans_date, :trans_cost, :receiver, :recipient
+                      )";
+            $bind = array(
+                ':trans_id'   => $this->transModel->getTransactionID(),
+                ':trans_date' => $this->transModel->getTransactionDate(),
+                ':trans_cost' => $this->transModel->getTransactionCost(),
+                ':receiver'   => $this->transModel->getReceivedBy(),
+                ':recipient'  => $this->transModel->getReceivedFrom()
+            );
+
+            $stmt = $con->prepare($query);
+            $stmt->execute($bind);
+
+
+            // second action - insert lease information
+
+            $query = "INSERT INTO tbl_lease(
+                        tenant_id,
+                        start_date,
+                        security_deposit,
+                        advance,
+                        rental_date,
+                        transaction_id,
+                        transaction_type
+                      )
+                      VALUES(
+                        :tenant,
+                        :start,
+                        :deposit,
+                        :advance,
+                        :rentDate,
+                        :transaction_id,
+                        :transaction_type
+                      )";
+            $bind = array(
+                ':tenant' => $this->leaseModel->getTenantId(),
+                ':start'  => $this->leaseModel->getStartDate(),
+                ':deposit' => $this->leaseModel->getDeposit(),
+                ':advance' => $this->leaseModel->getAdvance(),
+                ':rentDate' => $this->leaseModel->getRentDate(),
+                ':transaction_id' => $this->leaseModel->getTransactionID(),
+                ':transaction_type' => $this->leaseModel->getTransactionType()
+                );
+            $stmt = $con->prepare($query);
+            $stmt->execute($bind);
+
+            // third action - update tenant status
+
+            $query = 'UPDATE tbl_tenants SET tbl_tenants.status = 2 WHERE tbl_tenants.tenant_id = :id';
+            $bind  = array(
+                ':id' => $this->leaseModel->getTenantId()
+            );
+
+            $stmt = $con->prepare($query);
+            $stmt->execute($bind);
+
+        $con->commit();
     }
 
 }

@@ -16,7 +16,8 @@ class Dao {
     protected $db = null;
 
     public function __construct() {
-        $this->db = new Database('mysql:host=localhost;dbname=doorche', 'root', '');
+        $c = new Config();
+        $this->db = new Database($c->dbtype.':host='.$c->dbhost.';dbname='.$c->dbname, $c->dbuser, $c->dbpass);
     }
     //put your code here
 }

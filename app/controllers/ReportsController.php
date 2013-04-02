@@ -11,38 +11,32 @@
  * @license             University of the East Research and Development Unit
  * @copyright           Copyright (c) 2013
  */
-include ROOT . 'libs/fpdf/fpdf.php';
-
+include ROOT . 'libs/html2pdf/html2pdf.class.php';
 class ReportsController extends Controller {
 
-    public function lease($tenantID) {
-        $leaseDao = new LeaseDao();
-        $info = $leaseDao->getPostLeaseTenantDetails($tenantID);
-        $pdf = new FPDF();
-        $pdf->AddPage();
-        $pdf->Image(asset_url() . 'img/post-reg-report.png', 0, 0,200, 200);
-        $pdf->SetFont('Arial', '', 14);
-        $pdf->Cell(30, 40, "Tenant ID: ");
-        $pdf->Cell(40, 40, $info['tenant_id']);
-        $pdf->Ln(30);
-        $pdf->Cell(20, 0, "Date: ");
-        $pdf->Cell(40, 0, $info['start_date']);
 
-        $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Ln(10);
-        $pdf->Cell(40, 0, "Name", 0, 0, 'C');
-        $pdf->Cell(30, 0, "Unit #", 0, 0, 'C');
-        $pdf->Cell(80, 0, "Apt. #", 0, 0, 'C');
-        $pdf->Cell(20, 0, "Deposit", 0, 0, 'C');
-        $pdf->SetFont('Arial', '', 14);
+    public function __construct(View $view = null) {
+        parent::__construct($view);
+    }
 
-        $pdf->Ln(10);
-        $pdf->Cell(40, 0, $info['firstname'] . ' ' . $info['lastname'], 0, 0, 'C');
-        $pdf->Cell(30, 0, $info['unit_id'], 0, 0, 'C');
-        $pdf->Cell(80, 0, $info['apartment_key'], 0, 0, 'C');
-        $pdf->Cell(20, 0, $info['security_deposit'], 0, 0, 'C');
-        $pdf->Output();
-        //print_r($leaseDao->getPostLeaseTenantDetails());
+    public function lease($transaction_id) {
+        $transactioDao = new TransactionsDao();
+        $this->view->data['trans_info'] = $transactioDao->getAllTransactionDetails($transaction_id);
+        $this->view->data['transactions'] = $transactioDao->getLeaseTransaction($transaction_id);
+        $content = $this->view->output('report_lease');
+        $html2pdf = new HTML2PDF('P','Letter','en');
+        $html2pdf->WriteHTML($content);
+        $html2pdf->Output('example.pdf');
+    }
+
+    public function paydues($transaction_id) {
+        $transactioDao = new TransactionsDao();
+        $this->view->data['trans_info'] = $transactioDao->getAllTransactionDetails($transaction_id);
+        $this->view->data['transactions'] = $transactioDao->getRelatedTransactions($transaction_id);
+        $content = $this->view->output('report_dues');
+        $html2pdf = new HTML2PDF('P','Letter','en');
+        $html2pdf->WriteHTML($content);
+        $html2pdf->Output('example.pdf');
     }
 }
 

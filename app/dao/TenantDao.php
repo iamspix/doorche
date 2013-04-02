@@ -42,6 +42,16 @@ class TenantDao extends Dao {
         return $this->db->fetchAll($query, $bind);
     }
 
+    public function getAllTenantInfo($tenantID) {
+        $query = 'SELECT * FROM tbl_tenants
+                  JOIN tbl_units ON tbl_tenants.unit_id = tbl_units.unit_id
+                  JOIN tbl_apartments ON tbl_units.apartment_id = tbl_apartments.apartment_id
+                  WHERE tbl_tenants.tenant_id = :tenant_id';
+        $bind = array(':tenant_id' => $tenantID);
+        return $this->db->fetchAll($query, $bind);
+
+    }
+
     public function addTenant() {
         $query = 'INSERT INTO tbl_tenants(tenant_id, firstname, lastname, gender, mobile_number, unit_id)
                   VALUE(:id, :fname, :lname, :gender, :mobile, :unit)';

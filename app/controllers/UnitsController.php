@@ -52,25 +52,59 @@ class UnitsController extends Controller {
     }
 
     public function lease($tenant_id = null) {
-        $leaseModel = new LeaseModel();
-        $leaseModel->setTenantId($tenant_id);
-        $leaseDao = new LeaseDao($leaseModel);
-        $this->view->data['tenant_info'] = $leaseDao->getPreLeaseTenantDetails();
+        $leaseDao = new LeaseDao();
+        $results = $leaseDao->getPreLeaseTenantDetails($tenant_id);
+        if ($results['status'] != 1) {
+            die('The tenant has already rented a unit or not yet completed the registration process');
+        }
+        $this->view->data['tenant_info'] = $results;
         $this->view->render('unit_lease');
     }
 
-    public function leaseSubmit() {
+    public function occupy() {
+
+        // set all lease info
         $leaseModel = new LeaseModel();
         $leaseModel->setTenantId($_POST['tenant_id']);
         $leaseModel->setDeposit($_POST['deposit']);
+        $leaseModel->setAdvance($_POST['advance']);
         $mysqltime = date("Y-m-d H:i:s");
         $leaseModel->setStartDate($mysqltime);
         $leaseModel->setRentDate($_POST['rental_date']);
 
-        $leaseDao = new LeaseDao($leaseModel);
+        // figure out what apartment via tenant_id
+        $tenantDao = new TenantDao();
+        $results = $tenantDao->getAllTenantInfo($leaseModel->getTenantId());
+
+        $aptKey = $results[0]['apartment_key'];
+
+        $h = new TransactionHelper();
+        $transaction_id = $h->generateID($aptKey);
+
+
+        $leaseModel->setTransactionID($transaction_id);
+        $leaseModel->setTransactionType('lease');
+
+        // set all Transaction info prior to lease info
+        $transModel = new TransactionsModel();
+        $transModel->setReceivedFrom($leaseModel->getTenantId());
+
+        $transModel->setTransactionDate($leaseModel->getStartDate());
+
+        // compute the total cost of the transactions
+        $totalCost = floatval($leaseModel->getDeposit()) + floatval($leaseModel->getAdvance());
+
+        $transModel->setTransactionCost($totalCost);
+        $transModel->setTransactionID($leaseModel->getTransactionID());
+
+        $mgr_id = $results[0]['building_manager'];
+        $transModel->setReceivedBy($mgr_id);
+
+        $leaseDao = new LeaseDao($leaseModel, $transModel);
+
         $leaseDao->leaseUnit();
 
-        header('Location:' . base_url() . 'reports/lease/' . $leaseModel->getTenantId());
+        header('Location:' . base_url() . 'reports/lease/' . $transModel->getTransactionID());
     }
 
     public function rent($unitId) {

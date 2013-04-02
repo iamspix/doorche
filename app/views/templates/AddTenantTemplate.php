@@ -33,7 +33,7 @@
             <?php endif;?>
 
             <h1>Continue</h1>
-            <input type="submit" class="button" value="Add Tenant">
+            <input type="submit" class="button btn" value="Add Tenant">
         </form>
     </div>
 </div>
