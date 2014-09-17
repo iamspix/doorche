@@ -60,3 +60,5 @@ require APPPATH . 'autoload' . EXT;
 
 // require bootstrap file that will handle uri request then process it through
 require APPPATH . 'bootstrap' . EXT;
+
+// some comment to edit
